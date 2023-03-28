@@ -51,12 +51,20 @@
             text-align: center;
             padding-bottom: 5px;
         }
-        .BOTON{
-            background-color: rgb(102, 102, 102);
-            
+        .NAV{
+        }
+        #pregunta{
+            text-align: center;
+        }
+        #BOTON{
+            align-items: center;
+        }
+        input:invalid{
+            color: red;
         }
     </style>
-
+    <script>
+    </script>
   </head>
   <body>
     <header>
@@ -64,16 +72,20 @@
         <h3 id="Pregunta">¿Cual es tu tipo de auto favorito?</h3>
     </header>
     <nav>
-        <h3>
-            <ul>
-                <form action="">
-                    <li><input type="button" class="BOTON" value="Muscle Cars" onclick="elegir("rojo")"></li>
-                    <li><input type="button" class="BOTON" value="Deportivos Europeos"></li>
-                    <li><input type="button" class="BOTON" value="Deportivos Japoneses"></li>
-                </form>
-            </ul>
-        </h3>
+        <ul>
+            <li><h3 class="NAV">Muscle Cars</h3></li>
+            <li><h3 class="NAV">Deportivos Europeos</h3></li>
+            <li><h3 class="NAV">Deportivos Japoneses</h3></li>
+        </ul>
     </nav>
+    <div class="row">
+        <h3 id="pregunta">¿Cuál es tu auto favorito?</h3>
+        <div class="col"><input type="text" placeholder="Marca" name="marca" id="Marca" required></div>
+        <div class="col"><input type="text" placeholder="Modelo" name="modelo" id="Modelo" required></div>
+        <div class="col"><input type="number" placeholder="Año" name="año" min="1800" max="2023" id="Año" required>
+        </div>
+    </div>
+    <button id="BOTON">Enviar</button>
     <div class="row">
         <div class="col" id="MuscleCars">
             <img id="IMGM" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSVJdFxHVMfzV874YfpFxttcpr3aHNSGO3EA&usqp=CAU" alt="Charger">
