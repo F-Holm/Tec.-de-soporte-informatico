@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
+    <script src="https://code.jquery.com/jquery-3.6.4.js"integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <style>
         #MuscleCars{
         }
@@ -59,11 +59,34 @@
         #BOTON{
             align-items: center;
         }
-        input:invalid{
+        /*input:invalid{
             color: red;
-        }
+        }*/
     </style>
     <script>
+        function validarAño() {
+        var añoInput = document.getElementById('Año');
+        var año = añoInput.value.trim();
+        var regexAño = /^[0-9]*$/;
+              
+        // Comprobar si el input es válido
+        var esValido = true;
+        if (año === '' || !regexAño.test(año) || parseInt(año) < 1886 || parseInt(año) > new Date().getFullYear()) {
+          esValido = false;
+        }
+    
+        // Cambiar el color del botón según la validez del input
+        var BOTON = document.getElementById('BOTON');
+        if (esValido) {
+          //BOTON.style.backgroundColor = '';
+          $('#BOTON').css('background-color', '');
+        } else {
+          //BOTON.style.backgroundColor = 'red';
+          $('#BOTON').css('background-color', 'red');
+        }
+    
+        //return esValido;
+      }
     </script>
   </head>
   <body>
@@ -82,10 +105,10 @@
         <h3 id="pregunta">¿Cuál es tu auto favorito?</h3>
         <div class="col"><input type="text" placeholder="Marca" name="marca" id="Marca" required></div>
         <div class="col"><input type="text" placeholder="Modelo" name="modelo" id="Modelo" required></div>
-        <div class="col"><input type="number" placeholder="Año" name="año" min="1800" max="2023" id="Año" required>
+        <div class="col"><input type="number" placeholder="Año" max="2023" id="Año" min="1886" required>
         </div>
     </div>
-    <button id="BOTON">Enviar</button>
+    <button id="BOTON" onclick="validarAño()">Enviar</button>
     <div class="row">
         <div class="col" id="MuscleCars">
             <img id="IMGM" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSVJdFxHVMfzV874YfpFxttcpr3aHNSGO3EA&usqp=CAU" alt="Charger">
