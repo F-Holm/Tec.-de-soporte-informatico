@@ -48,7 +48,79 @@
     }
     </style>
     <script>
-    $(document).ready(function() {
+        
+        function activarMiCarrusel(idCarrusel, tiempo) {
+          var $imagenes = $('#' + idCarrusel + ' img');
+          var index = 0;
+        
+          $imagenes.css('display', 'none'); // ocultamos todas las imágenes al principio
+          $imagenes.eq(index).css('display', 'block'); // mostramos la primera imagen
+        
+          setInterval(function() {
+            $imagenes.eq(index).css('display', 'none'); // ocultamos la imagen actual
+            index = (index + 1) % $imagenes.length;
+            $imagenes.eq(index).css('display', 'block'); // mostramos la siguiente imagen
+          }, tiempo);
+        }
+        activarMiCarrusel(carousel, 5000);
+
+        
+        /*function activarMiCarrusel(idCarrusel, tiempo) {
+        // Obtener el carrusel y las imágenes dentro del carrusel
+          const carrusel = document.getElementById(idCarrusel);
+          const imagenes = carrusel.querySelectorAll('img');
+
+          // Crear los botones de navegación
+          const btnAnterior = document.createElement('button');
+          btnAnterior.textContent = 'Anterior';
+          const btnSiguiente = document.createElement('button');
+          btnSiguiente.textContent = 'Siguiente';
+
+          // Agregar los botones al carrusel
+          carrusel.appendChild(btnAnterior);
+          carrusel.appendChild(btnSiguiente);
+
+          imagenes[0].classList.css('display', 'block');
+          for (let index = 1; index < array.length; index++) {
+            imagenes[index].classList.css('display', 'none');
+          }
+
+          // Establecer el índice inicial y el temporizador
+          let indice = 0;
+          const temporizador = setInterval(cambiarImagen, tiempo);
+
+          function cambiarImagen() {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Incrementar el índice y volver al principio si llegamos al final
+            indice = (indice + 1) % imagenes.length;
+            // Mostrar la siguiente imagen
+            imagenes[indice].classList.add('visible');
+          }
+
+          // Agregar los eventos de clic a los botones de navegación
+          btnAnterior.addEventListener('click', () => {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Decrementar el índice y volver al final si llegamos al principio
+            indice = (indice - 1 + imagenes.length) % imagenes.length;
+            // Mostrar la imagen anterior
+            imagenes[indice].classList.add('visible');
+          });
+          btnSiguiente.addEventListener('click', () => {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Incrementar el índice y volver al principio si llegamos al final
+            indice = (indice + 1) % imagenes.length;
+            // Mostrar la siguiente imagen
+            imagenes[indice].classList.add('visible');
+          });
+        }*/
+
+
+
+
+    /*$(document).ready(function() {
       var imagenActual = 0;
       var cantImagenes = $('.carousel-images img').length;
       var interval;
@@ -134,7 +206,7 @@
       $('#IMG1').css('display', 'none');
       $('#IMG2').css('display', 'none');
       interval = setInterval(nextSlide, 5000);
-    });
+    });*/
     </script>
 </head>
 <body>
