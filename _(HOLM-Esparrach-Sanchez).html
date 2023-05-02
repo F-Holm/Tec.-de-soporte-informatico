@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <style>
+      #carousel {
+      position: relative;
+      width: 100%;
+      height: 400px;
+    }
+
+    .carousel-images {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /*height: 100%;*/
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      /*height: 100%;*/
+      object-fit: cover;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .carousel-controls button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      background-color: #fff;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    </style>
+    <script>
+        
+        function activarMiCarrusel(idCarrusel, tiempo) {
+          var $imagenes = $('#' + idCarrusel + ' img');
+          var index = 0;
+        
+          $imagenes.css('display', 'none'); // ocultamos todas las imágenes al principio
+          $imagenes.eq(index).css('display', 'block'); // mostramos la primera imagen
+        
+          setInterval(function() {
+            $imagenes.eq(index).css('display', 'none'); // ocultamos la imagen actual
+            index = (index + 1) % $imagenes.length;
+            $imagenes.eq(index).css('display', 'block'); // mostramos la siguiente imagen
+          }, tiempo);
+        }
+        activarMiCarrusel(carousel, 5000);
+
+        
+        /*function activarMiCarrusel(idCarrusel, tiempo) {
+        // Obtener el carrusel y las imágenes dentro del carrusel
+          const carrusel = document.getElementById(idCarrusel);
+          const imagenes = carrusel.querySelectorAll('img');
+
+          // Crear los botones de navegación
+          const btnAnterior = document.createElement('button');
+          btnAnterior.textContent = 'Anterior';
+          const btnSiguiente = document.createElement('button');
+          btnSiguiente.textContent = 'Siguiente';
+
+          // Agregar los botones al carrusel
+          carrusel.appendChild(btnAnterior);
+          carrusel.appendChild(btnSiguiente);
+
+          imagenes[0].classList.css('display', 'block');
+          for (let index = 1; index < array.length; index++) {
+            imagenes[index].classList.css('display', 'none');
+          }
+
+          // Establecer el índice inicial y el temporizador
+          let indice = 0;
+          const temporizador = setInterval(cambiarImagen, tiempo);
+
+          function cambiarImagen() {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Incrementar el índice y volver al principio si llegamos al final
+            indice = (indice + 1) % imagenes.length;
+            // Mostrar la siguiente imagen
+            imagenes[indice].classList.add('visible');
+          }
+
+          // Agregar los eventos de clic a los botones de navegación
+          btnAnterior.addEventListener('click', () => {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Decrementar el índice y volver al final si llegamos al principio
+            indice = (indice - 1 + imagenes.length) % imagenes.length;
+            // Mostrar la imagen anterior
+            imagenes[indice].classList.add('visible');
+          });
+          btnSiguiente.addEventListener('click', () => {
+            // Ocultar la imagen actual
+            imagenes[indice].classList.remove('visible');
+            // Incrementar el índice y volver al principio si llegamos al final
+            indice = (indice + 1) % imagenes.length;
+            // Mostrar la siguiente imagen
+            imagenes[indice].classList.add('visible');
+          });
+        }*/
+
+
+
+
+    /*$(document).ready(function() {
+      var imagenActual = 0;
+      var cantImagenes = $('.carousel-images img').length;
+      var interval;
+        
+      $('.carousel-controls .anterior').click(function() {
+        clearInterval(interval);
+        if (imagenActual > 0) {
+            imagenActual--;
+        } else {
+            imagenActual = cantImagenes - 1;
+        }
+        if (imagenActual == 0){
+          $('#IMG0').css('display', 'block');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'none');
+        }
+        else if(imagenActual == 1){
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'block');
+          $('#IMG2').css('display', 'none');
+        }
+        else{
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'block');
+        }
+        //$('.carousel-images').css('display', 'none');
+        //$('.carousel-images').css('display', 'block');
+        //$('.carousel-images').css('transform', 'translateX(-' + imagenActual + '00%)');
+        interval = setInterval(nextSlide, 5000);
+      });
+  
+      $('.carousel-controls .siguiente').click(function() {
+        clearInterval(interval);
+        if (imagenActual < cantImagenes - 1) {
+            imagenActual++;
+        } else {
+            imagenActual = 0;
+        }
+        if (imagenActual == 0){
+          $('#IMG0').css('display', 'block');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'none');
+        }
+        else if(imagenActual == 1){
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'block');
+          $('#IMG2').css('display', 'none');
+        }
+        else{
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'block');
+        }
+        //$('.carousel-images').css('transform', 'translateX(-' + imagenActual + '00%)');
+        interval = setInterval(nextSlide, 5000);
+      });
+  
+      function nextSlide() {
+        if (imagenActual < cantImagenes - 1) {
+            imagenActual++;
+        } else {
+            imagenActual = 0;
+        }
+        if (imagenActual == 0){
+          $('#IMG0').css('display', 'block');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'none');
+        }
+        else if(imagenActual == 1){
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'block');
+          $('#IMG2').css('display', 'none');
+        }
+        else{
+          $('#IMG0').css('display', 'none');
+          $('#IMG1').css('display', 'none');
+          $('#IMG2').css('display', 'block');
+        }
+        //$('.carousel-images').css('transform', 'translateX(-' + imagenActual + '00%)');
+      }
+      $('#IMG0').css('display', 'block');
+      $('#IMG1').css('display', 'none');
+      $('#IMG2').css('display', 'none');
+      interval = setInterval(nextSlide, 5000);
+    });*/
+    </script>
+</head>
+<body>
+    <div id="carousel">
+      <div class="carousel-images">
+        <img id="IMG0" src="https://wallpaperaccess.com/full/1188099.jpg" alt="123">
+        <img id="IMG1" src="https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt9c63fcb2751bcd95/60dd45f276a3de39ad1b455b/2d1eec3e18ba789688f02a1a2b80a40239dbb7da.jpg?auto=webp&format=jpg&quality=80" alt="456">
+        <img id="IMG2" src="https://wallpapercrafter.com/desktop1/617440-sports-1920x1080-football-soccer-paris-saint-germain.jpg" alt="789">
+        </div>
+      <div class="carousel-controls">
+        <button class="anterior">Anterior</button>
+        <button class="siguiente">Siguiente</button>
+      </div>
+    </div>
+</body>
+</html>
