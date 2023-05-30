@@ -1,0 +1,141 @@
+ <!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.js"integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <style>
+        #MuscleCars{
+        }
+        #Europeos{
+        }
+        #Japoneses{
+        }
+        #IMGM{
+            width: 90%;
+            margin-top: 5%;
+        }
+        #IMGE{
+            width: 90%;
+            margin-top: 5%;
+        }
+        #IMGJ{
+            width: 90%;
+            margin-top: 5%;
+        }
+        nav{
+            background-color: gray;
+            color: black;
+            width: 100%;
+            list-style-type: none;
+            text-align: center;
+            position: sticky;
+            top: 0%;
+        }
+        nav li {
+            display: inline-flex;
+            padding-left: 6%;
+            padding-right: 6%;
+        }
+        nav li:hover{
+            background-color: rgb(102, 102, 102);
+        }
+        #TITULO{
+            text-align: center;
+            padding: 10px;
+            padding-bottom: 15px;
+        }
+        #Pregunta{
+            text-align: center;
+            padding-bottom: 5px;
+        }
+        .NAV{
+        }
+        #pregunta{
+            text-align: center;
+        }
+        #BOTON{
+            align-items: center;
+        }
+        /*input:invalid{
+            color: red;
+        }*/
+    </style>
+    <script>
+        function validarAño() {
+        var añoInput = document.getElementById('Año');
+        var año = añoInput.value.trim();
+        var regexAño = /^[0-9]*$/;
+              
+        // Comprobar si el input es válido
+        var esValido = true;
+        if (año === '' || !regexAño.test(año) || parseInt(año) < 1886 || parseInt(año) > new Date().getFullYear()) {
+          esValido = false;
+        }
+    
+        // Cambiar el color del botón según la validez del input
+        var BOTON = document.getElementById('BOTON');
+        if (esValido) {
+          //BOTON.style.backgroundColor = '';
+          $('#BOTON').css('background-color', '');
+
+        let _marca = $("#Marca").val();
+        let _modelo = $("#Modelo").val();
+        let _año = $("#Año").val();
+        let datos = { marca: _marca, modelo: _modelo, año: _año };
+
+        $.ajax({
+            method: "POST",
+            url:"/insertar",
+            data: datos
+        })
+
+        } else {
+          //BOTON.style.backgroundColor = 'red';
+          $('#BOTON').css('background-color', 'red');
+        }
+
+        
+        //return esValido;
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+        <h1 id="TITULO">MotorXperience</h1>
+        <h3 id="Pregunta">¿Cual es tu tipo de auto favorito?</h3>
+    </header>
+    <nav>
+        <ul>
+            <li><h3 class="NAV">Muscle Cars</h3></li>
+            <li><h3 class="NAV">Deportivos Europeos</h3></li>
+            <li><h3 class="NAV">Deportivos Japoneses</h3></li>
+        </ul>
+    </nav>
+    <div class="row">
+        <h3 id="pregunta">¿Cuál es tu auto favorito?</h3>
+        <div class="col"><input type="text" placeholder="Marca" name="marca" id="Marca" required></div>
+        <div class="col"><input type="text" placeholder="Modelo" name="modelo" id="Modelo" required></div>
+        <div class="col"><input type="number" placeholder="Año" max="2023" id="Año" min="1886" required>
+        </div>
+    </div>
+    <button id="BOTON" onclick="validarAño()">Enviar</button>
+    <div class="row">
+        <div class="col" id="MuscleCars">
+            <img id="IMGM" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSVJdFxHVMfzV874YfpFxttcpr3aHNSGO3EA&usqp=CAU" alt="Charger">
+            <img id="IMGM" src="https://www.goodwood.com/globalassets/.road--racing/road/news/2020/5-may/best-muscle-cars-for-2020-dan-trent/best-muscle-cars-for-2020-1-chevrolet-camaro-zl1-1le-goodwood-26052020.jpg?crop=(0,159,2600,1622)&width=1600" alt="">
+        </div>
+        <div class="col" id="Europeos">
+            <img id="IMGE" src="https://fotos.perfil.com/2021/03/11/el-superdeportivo-lamborghini-countach-lp-500-cumple-50-anos-1141723.jpg" alt="Coutach">
+        <img id="IMGE" src="https://img.remediosdigitales.com/8e40ef/r82/1366_2000.jpg" alt="">
+        </div>
+        <div class="col" id="Japoneses">
+            <img id="IMGJ" src="https://www.pruebaderuta.com/wp-content/uploads/2017/08/toyota-supra-1994.jpg" alt="Supra">
+        <img id="IMGJ"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTywnHA3lS2rKP-6J4Ma6v6YSvKzNHPnef1Ww&usqp=CAU" alt="">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
