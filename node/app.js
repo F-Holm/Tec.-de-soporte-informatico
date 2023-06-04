@@ -43,8 +43,12 @@ app.get('/', (req, res) => {
 
 // Ruta para mostrar el formulario
 app.get('/formulario', (req, res) => {
- res.sendFile(__dirname + '/formulario.html');
+ res.sendFile(__dirname + '/Bootstrap(HOLM-Esparrach-Sanchez).html');
 });
+
+app.get('/carrusel', (req, res) => {
+    res.sendFile(__dirname + '/carrusel(HOLM-Esparrach-Sanchez).html');
+   });
 
 
 
