@@ -60,7 +60,7 @@ app.post('/insertar', (req, res) => {
  const values = [marca, modelo, año];
 
  connection.query(sql, values, (err, result) => {
- if (err) {
+ if (err) { 
  console.error('Error al insertar datos:', err);
  res.sendStatus(500);
  return;
