@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 
 // Ruta para mostrar el formulario
 app.get('/formulario', (req, res) => {
- res.sendFile(__dirname + '/Bootstrap(HOLM-Esparrach-Sanchez).html');
+ res.sendFile(__dirname + '/Bootstrap_Validacion_Formulario_JQuery.html');
 });
 
 app.get('/carrusel', (req, res) => {
